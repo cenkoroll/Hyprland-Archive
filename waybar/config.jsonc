@@ -1,0 +1,165 @@
+{
+    "layer": "top",
+    "position": "bottom",
+    "mode": "dock",
+    "exclusive": true,
+    "passtrough": true,
+    "gtk-layer-shell": true,
+    "name": "horBar",
+    "reload_style_on_change": true,
+    "fixed-center": true,
+
+    "modules-left": [
+		"custom/space",
+		"clock",
+		"custom/space",
+		"custom/power",
+   	 	"custom/space",
+		"idle_inhibitor",
+   	 	"custom/space",
+		"network",
+   	 	"custom/space",
+		"wireplumber",
+  	 	"custom/space",
+    "custom/updates",
+      "custom/space",
+    "custom/cpuhistory",
+  	 	"custom/space",
+    "memory",
+   	 	"custom/space",
+    "disk",
+   	 	"custom/space",
+    "tray",
+    ],
+
+    "modules-center": [
+    ],
+
+    "modules-right": [
+		"hyprland/workspaces",
+		"custom/space"
+    ],
+
+    "group/left": {
+    	"orientation": "inherit",
+	"drawer": {
+		"transition-duration": 500,
+		"transition-left-to-right": true,
+		"click-to-reveal": true,
+	},
+	"modules": [
+		"custom/updates",
+		"custom/space",
+		"custom/cpuhistory",
+		"custom/space",
+    		"memory",
+		"custom/space",
+		"disk",
+   	 	"custom/space",
+		"tray"
+	]
+    },
+
+    "disk": {
+    	"interval": 30,
+    	"format": "{percentage_used}%\n<span size='6pt'>D_USAGE</span>",
+	"path": "/",
+	"unit": "GB"
+    },
+
+    "tray": {
+        "icon-size": 14,
+	"show-passive-items": true,
+        "spacing": 16,
+	"reverse-direction": true,
+	"smooth-scrolling-threshold": 2
+    },
+
+    "hyprland/workspaces": {
+    	"format": "{icon}\n<span size='6pt'>Workspace</span>",
+	"format-icons": {
+		"default": "ー",
+		"active": "HERE"
+	}
+    },
+
+    "clock": {
+        "format": "{:%H:%M}\n<span size='6pt'>CUR_TIME</span>",
+        "tooltip-format": "<tt>{calendar}</tt>",
+		"calendar": {
+			"mode": "month",
+			"weeks-pos": "",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span size='15pt'><b>/// {}\n</b></span>", 
+				"days": "<span size='12pt'><b>{}</b></span>", 
+				"weeks": "<span size='12pt'><b>{}</b></span>", 
+				"weekdays": "<span size='12pt'><b>{}</b></span>", 
+				"today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+		}
+		},
+
+    },
+
+    "wireplumber":{
+        "format": "{volume}%\n<span size='6pt'>VOLUME</span>",
+        "format-muted": "切\n<span size='6pt'>VOLUME</span>",
+	"on-click": "helvum",
+    	"max-volume": 150,
+    	"scroll-step": 0.2
+    },
+
+    "network": {
+	"format-wifi": "<span color='#c9b03e'>WLES({ifname})</span>\n<span size='6pt'>NETWORK</span>",
+	"format-ethernet": "<span color='#c9b03e'>LAN({ifname})</span>\n<span size='6pt'>NETWORK</span>",
+	"tooltip-format-wifi": "接続先\t\t: {essid}\n電波強度\t: {signaldBm}\n\n識別番号\t: {ipaddr}\n門先\t\t: {gwaddr}",
+	"tooltip-format-ethernet": "IFNAME: {ifname}\nADDRESS: {ipaddr}",
+	"format-disconnected": "<span color='#B7416E'>D/SC</span>\n<span size='6pt'>NETWORK</span>",
+	"on-click": "nm-connection-editor"
+    },
+
+"custom/updates": {
+    "format": "{text}\n<span size='6pt'>SYS_UPDATE</span>",
+    "return-type": "json",
+    "format-icons": {
+        "has-updates": "<span color='#B7416E'>AVAI</span>",
+        "updated": "UPDT"
+    },
+    "exec-if": "which checkupdates",
+    "exec": "~/.config/waybar/scripts/updates.sh",
+    "interval": 600
+},
+
+    "custom/cpuhistory": {
+    	"exec": "~/.config/waybar/scripts/cpu_history.py -d 30",
+	"format": "{}\n<span size='6pt'>C_USAGE</span>",
+	"interval": 1,
+	"return-type": "json",
+	"on-click": "~/.config/waybar/scripts/cpu_history.py toggle"
+    },
+
+    "memory": {
+    	"interval": 1,
+	"format": "{}%\n<span size='6pt'>M_USAGE</span>"
+    },
+
+    "custom/space": {
+    	"format": "<span color='#404042'> </span>",
+	"tooltip": false
+    },
+
+"custom/power": {
+    "format": "<span color='#A8D8A8'>PLUG</span>\n<span size='6pt'>POWER</span>",
+    "exec": "echo 'on'",
+    "interval": "once",
+    "escape": false
+},
+
+    "idle_inhibitor": {
+    	"format": "{icon}\n<span size='6pt'>NICOTINE</span>",
+	"format-icons": {
+		"activated": "<span color='#E57373'>FUCK</span>",
+    "deactivated": "<span color='#A8D8A8'>GOOD</span>"
+	}
+    }
+}
